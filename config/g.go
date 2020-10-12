@@ -23,7 +23,7 @@ func getConfig(projectName string) {
 	}
 }
 
-// GetMysqlConnectingString func
+// GetMysqlConnectingString funcl
 func GetMysqlConnectingString() string {
 	usr := viper.GetString("mysql.user")
 	pwd := viper.GetString("mysql.password")
