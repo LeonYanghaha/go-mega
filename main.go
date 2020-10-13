@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gorilla/context"
 	"go-mega/controller"
 	"go-mega/model"
 	"net/http"
@@ -14,5 +15,5 @@ func main() {
 
 	// Setup Controller
 	controller.Startup()
-	http.ListenAndServe(":8888", nil)
+	http.ListenAndServe(":8888", context.ClearHandler(http.DefaultServeMux))
 }
