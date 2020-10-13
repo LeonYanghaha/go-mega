@@ -1,17 +1,6 @@
 {{define "content"}}
     <h1>Hello, {{.CurrentUser}}!</h1>
 
-    <form {{/*class="form-control"*/}} action="/" method="post">
-
-        <input type="text" class="form-control" name="body" placeholder="say something..."
-               aria-describedby="basic-addon1">
-        <p><input type="submit" name="submit" value="Post" class="btn btn-outline-primary"></p>
-        {{ if .Flash }}
-            <span style="color: red;">[{{.Flash}}]</span>
-        {{ end }}
-    </form>
-
-
     {{range .Posts}}
         <table>
             <tr valign="top">
@@ -25,7 +14,7 @@
         <ul class="pagination justify-content-center">
             {{ if gt .PrevPage 0 }}
                 <li class="page-item">
-                    <a href="/?page={{.PrevPage}}">
+                    <a href="/explore?page={{.PrevPage}}">
                         <span class="page-link" aria-hidden="true">&larr; Newer Posts</span>
                     </a>
                 </li>
@@ -38,7 +27,7 @@
             {{ end }}
             {{ if gt .NextPage 0 }}
                 <li class="page-item">
-                    <a href="/?page={{.NextPage}}">
+                    <a href="/explore?page={{.NextPage}}">
                         <span class="page-link" aria-hidden="true">Older Posts &rarr;</span>
                     </a>
                 </li>
@@ -49,8 +38,6 @@
                     </a>
                 </li>
             {{ end }}
-
         </ul>
     </nav>
-
 {{end}}

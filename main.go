@@ -15,5 +15,5 @@ func main() {
 
 	// Setup Controller
 	controller.Startup()
-	http.ListenAndServe(":8888", context.ClearHandler(http.DefaultServeMux))
+	_ = http.ListenAndServe(":8888", context.ClearHandler(http.DefaultServeMux))
 }

@@ -33,3 +33,17 @@ func GetMysqlConnectingString() string {
 
 	return fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=%s&parseTime=true", usr, pwd, host, db, charset)
 }
+
+func GetSMTPConfig() (server string, port int, user, pwd string) {
+	server = viper.GetString("mail.smtp")
+	port = viper.GetInt("mail.smtp-port")
+	user = viper.GetString("mail.user")
+	pwd = viper.GetString("mail.password")
+	return
+}
+
+// GetServerURL func
+func GetServerURL() (url string) {
+	url = viper.GetString("server.url")
+	return
+}

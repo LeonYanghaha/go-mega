@@ -4,3 +4,10 @@ mysql:
   host: localhost
   password: 123456
   user: root
+mail:
+  smtp: smtp.163.com
+  smtp-port: 465
+  user: yangkai030208@163.com
+  password: LYWWSSHCAWICYBIP
+server:
+  url: http://127.0.0.1:8888
