@@ -8,6 +8,6 @@ mail:
   smtp: smtp.163.com
   smtp-port: 465
   user: yangkai030208@163.com
-  password: LYWWSSHCAWICYBIP
+  password: yanghaha
 server:
   url: http://127.0.0.1:8888
