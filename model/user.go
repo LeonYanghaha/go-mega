@@ -211,3 +211,8 @@ func UpdatePassword(username, password string) error {
 	contents := map[string]interface{}{"password_hash": Md5(password)}
 	return UpdateUserByUsername(username, contents)
 }
+
+// FormattedLastSeen func
+func (u *User) FormattedLastSeen() string {
+	return u.LastSeen.Format("2006-01-02 15:04:05")
+}

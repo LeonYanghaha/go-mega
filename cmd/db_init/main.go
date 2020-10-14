@@ -15,23 +15,23 @@ func main() {
 	db.DropTableIfExists(model.User{}, model.Post{}, "follower")
 	db.CreateTable(model.User{}, model.Post{})
 
-	model.AddUser("bonfy", "abc123", "i@bonfy.im")
-	model.AddUser("rene", "abc123", "rene@test.com")
-	model.AddUser("yanghaha", "yanghaha", "yanghaha@test.com")
+	_ = model.AddUser("bonfy", "abc123", "i@bonfy.im")
+	_ = model.AddUser("rene", "abc123", "rene@test.com")
+	_ = model.AddUser("yanghaha", "yanghaha", "yanghaha@test.com")
 
 	u1, _ := model.GetUserByUsername("bonfy")
-	u1.CreatePost("Beautiful day in Portland!")
-	model.UpdateAboutMe(u1.Username, `I'm the author of Go-Mega Tutorial you are reading now!`)
+	_ = u1.CreatePost("Beautiful day in Portland!")
+	_ = model.UpdateAboutMe(u1.Username, `I'm the author of Go-Mega Tutorial you are reading now!`)
 
 	u2, _ := model.GetUserByUsername("rene")
-	u2.CreatePost("The Avengers movie was so cool!")
-	u2.CreatePost("Sun shine is beautiful")
+	_ = u2.CreatePost("The Avengers movie was so cool!")
+	_ = u2.CreatePost("Sun shine is beautiful")
 
 	u3, _ := model.GetUserByUsername("yanghaha")
-	u3.CreatePost("yanghahaaaa")
-	u3.CreatePost(".............")
+	_ = u3.CreatePost("yanghahaaaa")
+	_ = u3.CreatePost(".............")
 
-	u1.Follow(u2.Username)
-	u2.Follow(u3.Username)
-	u3.Follow(u2.Username)
+	_ = u1.Follow(u2.Username)
+	_ = u2.Follow(u3.Username)
+	_ = u3.Follow(u2.Username)
 }
