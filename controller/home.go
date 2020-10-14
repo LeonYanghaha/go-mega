@@ -27,6 +27,8 @@ func (h home) registerRoutes() {
 	r.HandleFunc("/reset_password/{token}", resetPasswordHandler)
 	r.HandleFunc("/user/{username}/popup", popupHandler)
 
+	r.HandleFunc("/post", postHandler)
+
 	r.NotFoundHandler = http.HandlerFunc(notfoundHandler)
 	r.HandleFunc("/404", notfoundHandler)
 
@@ -291,3 +293,11 @@ func popupHandler(w http.ResponseWriter, r *http.Request) {
 	_ = templates[tpName].Execute(w, &v)
 }
 
+func postHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodDelete {
+		_ = r.ParseForm()
+		//TODO delete post
+		//post_id := r.Form.Get("post_id")
+
+	}
+}
