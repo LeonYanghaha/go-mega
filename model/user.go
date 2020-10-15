@@ -117,7 +117,7 @@ func (u *User) FollowingIDs() []int {
 	defer rows.Close()
 	for rows.Next() {
 		var id, followerID int
-		rows.Scan(&id, &followerID)
+		_ = rows.Scan(&id, &followerID)
 		ids = append(ids, id)
 	}
 	return ids
@@ -155,6 +155,13 @@ func (u *User) IsFollowedByUser(username string) bool {
 func (u *User) CreatePost(body string) error {
 	post := Post{Body: body, UserID: u.ID}
 	return db.Create(&post).Error
+}
+
+// DeletePost func
+func (u *User) DeletePost(postId int) error {
+
+	post := Post{ID: postId, UserID: u.ID}
+	return db.Delete(&post).Error
 }
 
 // FollowingPostsByPageAndLimit func

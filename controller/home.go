@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type home struct{}
@@ -27,7 +28,7 @@ func (h home) registerRoutes() {
 	r.HandleFunc("/reset_password/{token}", resetPasswordHandler)
 	r.HandleFunc("/user/{username}/popup", popupHandler)
 
-	r.HandleFunc("/post", postHandler)
+	r.HandleFunc("/post", middleAuth(postHandler))
 
 	r.NotFoundHandler = http.HandlerFunc(notfoundHandler)
 	r.HandleFunc("/404", notfoundHandler)
@@ -294,10 +295,13 @@ func popupHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func postHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodDelete {
-		_ = r.ParseForm()
-		//TODO delete post
-		//post_id := r.Form.Get("post_id")
 
+	if r.Method == http.MethodPost {
+		_ = r.ParseForm()
+		username, _ := getSessionUser(r)
+		postId, _ := strconv.Atoi(r.Form.Get("post_id"))
+		_ = vm.DeletePost(username, postId)
+		http.Redirect(w, r, "/user/"+username, http.StatusSeeOther)
 	}
+
 }

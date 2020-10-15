@@ -31,3 +31,9 @@ func CreatePost(username, post string) error {
 	u, _ := model.GetUserByUsername(username)
 	return u.CreatePost(post)
 }
+
+// DeletePost func
+func DeletePost(username string, post int) error {
+	u, _ := model.GetUserByUsername(username)
+	return u.DeletePost(post)
+}

@@ -17,7 +17,6 @@ import (
 )
 
 // session
-
 func getSessionUser(r *http.Request) (string, error) {
 	var username string
 	session, err := store.Get(r, sessionName)
@@ -26,12 +25,10 @@ func getSessionUser(r *http.Request) (string, error) {
 	}
 
 	val := session.Values["user"]
-	fmt.Println("val:", val)
 	username, ok := val.(string)
 	if !ok {
 		return "", errors.New("can not get session user")
 	}
-	fmt.Println("username:", username)
 	return username, nil
 }
 
@@ -41,6 +38,9 @@ func setSessionUser(w http.ResponseWriter, r *http.Request, username string) err
 		return err
 	}
 	session.Values["user"] = username
+	session.Options.MaxAge = 60 * 30 * 2
+	session.Options.HttpOnly = true
+	session.Options.Path = "/"
 	err = session.Save(r, w)
 	if err != nil {
 		return err
