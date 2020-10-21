@@ -4,10 +4,11 @@ Achievements of learning golang
 ### TODO
 
 * delete post ✅
-* change struct  ❎
+* change struct ✅
 * modify the validity period of the session  ✅
-* change struct  ❎
-* modify post ❎
+* modify post    🔧
+* edit profile ❎
 * makefile  ❎
 * upload image & show image of post ❎
 * optimize page display   ❎
+* logger
