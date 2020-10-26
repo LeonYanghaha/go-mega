@@ -27,6 +27,7 @@ func (h home) registerRoutes() {
 
 	r.HandleFunc("/post-delete", middleAuth(postHandler)).Methods("POST")
 	r.HandleFunc("/post-edit", middleAuth(postEditHandler)).Methods("POST")
+	r.HandleFunc("/post-update", middleAuth(postUpdateHandler)).Methods("POST")
 
 	r.NotFoundHandler = http.HandlerFunc(notfoundHandler)
 	r.HandleFunc("/404", notfoundHandler)

@@ -47,11 +47,11 @@
                     said {{.FormattedTimeAgo}}:<br>{{ .Body }}
                 </td>
                 <td>
-                    <form action="/post-delete" method="POST">
+                    <form action="/post-delete" method="POST" style="display: inline-block;float: right">
                         <input type="hidden" name="post_id" value="{{.ID}}">
                         <input type="submit" name="submit" value="delete" class="btn btn-outline-primary btn-xs">
                     </form>
-                    <form action="/post-edit" method="POST">
+                    <form action="/post-edit" method="POST" style="display: inline-block; float: right">
                         <input type="hidden" name="post_id" value="{{.ID}}">
                         <input type="submit" name="submit" value="edit" class="btn btn-outline-primary btn-xs">
                     </form>

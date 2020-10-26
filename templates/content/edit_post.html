@@ -1,7 +1,11 @@
 {{define "content"}}
 
-
-    ;;;;;;
-    {{.Post.body}}
+    <form action="/post-update" method="POST">
+        <textarea name="post_body">
+                    {{.Post.Body}}
+        </textarea>
+        <input type="hidden" name="post_id" value="{{.ID}}">
+        <input type="submit" name="submit" value="update" class="btn btn-outline-primary btn-xs">
+    </form>
 
 {{end}}

@@ -1,39 +1,46 @@
 package controller
 
 import (
+	"fmt"
 	"go-mega/model"
 	"go-mega/vm"
 	"net/http"
 	"strconv"
 )
 
+func postUpdateHandler(w http.ResponseWriter, r *http.Request) {
+	_ = r.ParseForm()
+	username, _ := getSessionUser(r)
+	currentUser, err := model.GetUserByUsername(username)
+	if err != nil {
+		fmt.Print(err)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+	postId, _ := strconv.Atoi(r.Form.Get("post_id"))
+	postBody := r.Form.Get("post_body")
+	_ = model.UpdatePostById(postId, currentUser.ID, postBody)
+	http.Redirect(w, r, "/user/"+username, http.StatusSeeOther)
+
+}
+
 func postEditHandler(w http.ResponseWriter, r *http.Request) {
 
 	tpName := "edit_post.html"
 	vop := vm.EditPostModelOp{}
-	println("......")
-	//_ = r.ParseForm()
-	//username, _ := getSessionUser(r)
-	//postId, _ := strconv.Atoi(r.Form.Get("post_id"))
-	//currentUser, err := model.GetUserByUsername(username)
-	//if err != nil {
-	//	fmt.Print(err)
-	//	http.Redirect(w, r, "/", http.StatusSeeOther)
-	//}
-	//post, errs := model.GetPostByPostIdAndUserId(postId, currentUser.ID)
-	//if err != nil {
-	//	fmt.Print(errs)
-	//	http.Redirect(w, r, "/", http.StatusSeeOther)
-	//}
-	//fmt.Println(post)
-	v := vop.GetEditPostVM(model.Post{
-		ID:        1,
-		UserID:    1,
-		User:      model.User{ID:2,Username:"sdfsd"},
-		Body:      "vsdkjfhsdfhsiod",
-		Timestamp: nil,
-	})
-
+	_ = r.ParseForm()
+	username, _ := getSessionUser(r)
+	postId, _ := strconv.Atoi(r.Form.Get("post_id"))
+	currentUser, err := model.GetUserByUsername(username)
+	if err != nil {
+		fmt.Print(err)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+	post, errs := model.GetPostByPostIdAndUserId(postId, currentUser.ID)
+	if err != nil {
+		fmt.Print(errs)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+	v := vop.GetEditPostVM(*post)
 	_ = templates[tpName].Execute(w, &v)
 
 }
